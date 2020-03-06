@@ -1,0 +1,28 @@
+{
+  "npmScope": "practica-final-curso-ivandpazd",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "world-bank": {
+      "tags": []
+    },
+    "world-bank-e2e": {
+      "tags": [],
+      "implicitDependencies": ["world-bank"]
+    },
+    "shared-domain": {
+      "tags": []
+    },
+    "shared-ui": {
+      "tags": []
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "practicaFinalCursoIvandpazd",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "practica-final-curso-ivandpazd",
+      "kebab-case"
+    ]
+  }
+}
