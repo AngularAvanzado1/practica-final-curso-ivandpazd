@@ -1,0 +1,26 @@
+<div class="data" *ngIf="continentalRegions$ | async as continentalRegions">
+    <generic-data-template [title]="title" [api]="continentalRegionsAPI">
+        <table>
+            <thead>
+                <tr>
+                    <td i18n>id</td>
+                    <td i18n>name</td>
+                    <td i18n>code</td>
+                    <td i18n>iso2code</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let cRegions of continentalRegions[1]">
+                <tr *ngIf="cRegions.id !== ''">
+                    <td>{{ cRegions.id }}</td>
+                    <td>{{ cRegions.name }}</td>
+                    <td>{{ cRegions.code }}</td>
+                    <td>{{ cRegions.iso2code }}</td>
+                    <td><button (click)="goToRegion(cRegions.code)" i18n>See Region</button></td>
+                </tr>
+            </ng-container>
+            </tbody>
+        </table>
+    </generic-data-template>
+</div>

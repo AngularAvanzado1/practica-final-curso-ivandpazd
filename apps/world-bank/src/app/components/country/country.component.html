@@ -1,0 +1,31 @@
+<button (click)="goToContinental()" i18n>Back to Continental Regions</button>
+<button (click)="goToRegion()" i18n>Back to Region</button>
+<div class="data" *ngIf="country$ | async as country">
+    <generic-data-template [title]="title" [api]="countryAPI">
+        <table>
+            <thead>
+            <tr>
+                <td i18n>Id</td>
+                <td i18n>Name</td>
+                <td i18n>Capital City</td>
+                <td i18n>Iso2code</td>
+                <td i18n>Longitude</td>
+                <td i18n>Latitude</td>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let rCountry of country[1]">
+                <tr *ngIf="rCountry.id !== ''">
+                    <td>{{ rCountry.id }}</td>
+                    <td>{{ rCountry.name }}</td>
+                    <td>{{ rCountry.capitalCity }}</td>
+                    <td>{{ rCountry.iso2Code }}</td>
+                    <td>{{ rCountry.longitude }}</td>
+                    <td>{{ rCountry.latitude }}</td>
+                </tr>
+            </ng-container>
+            </tbody>
+        </table>
+    </generic-data-template>
+</div>
+

@@ -1,0 +1,10 @@
+header {
+    width: 100%;
+    float: left;
+    background-color: #24292e;
+}
+
+header h1 {
+    color: #e6ebf1;
+    text-align: center;
+}

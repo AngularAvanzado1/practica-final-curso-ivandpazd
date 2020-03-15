@@ -4,13 +4,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "practicaFinalCursoIvandpazd",
+      "generic",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "practica-final-curso-ivandpazd",
+      "generic",
       "kebab-case"
     ]
   }

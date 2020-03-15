@@ -1,14 +1,13 @@
-import {SubData} from "./subdata.interface";
+import {SubDataInterface} from "./subdata.interface";
 
-export interface Country {
-    message: string;
+export interface CountryInterface {
     id: string;
     iso2Code: string;
     name: string;
-    region: SubData;
-    adminregion: SubData;
-    incomeLevel: SubData;
-    lendingType: SubData;
+    region: SubDataInterface;
+    adminregion: SubDataInterface;
+    incomeLevel: SubDataInterface;
+    lendingType: SubDataInterface;
     capitalCity: string;
     longitude: string;
     latitude: string;

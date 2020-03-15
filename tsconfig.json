@@ -16,8 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@world-bank/domain": ["libs/shared/domain/src/index.ts"],
-      "@world-bank/ui": ["libs/shared/ui/src/index.ts"]
+      "@generic/domain": ["libs/shared/domain/src/index.ts"],
+      "@generic/ui": ["libs/shared/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

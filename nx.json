@@ -11,18 +11,18 @@
     "nx.json": "*"
   },
   "projects": {
+    "shared-domain": {
+      "tags": []
+    },
+    "shared-ui": {
+      "tags": []
+    },
     "world-bank": {
       "tags": []
     },
     "world-bank-e2e": {
       "tags": [],
       "implicitDependencies": ["world-bank"]
-    },
-    "shared-domain": {
-      "tags": []
-    },
-    "shared-ui": {
-      "tags": []
     }
   }
 }

@@ -1,0 +1,11 @@
+<article>
+    <header>
+        <h2>{{ title }}</h2>
+    </header>
+    <main>
+        <ng-content select="table"></ng-content>
+    </main>
+    <footer>
+        <p i18n>Data from: '{{ api }}'</p>
+    </footer>
+</article>

@@ -1,6 +1,64 @@
 {
   "version": 1,
   "projects": {
+    "shared-domain": {
+      "root": "libs/shared/domain",
+      "sourceRoot": "libs/shared/domain/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/domain/tsconfig.lib.json",
+              "libs/shared/domain/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/domain/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/domain/jest.config.js",
+            "tsConfig": "libs/shared/domain/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-ui": {
+      "projectType": "library",
+      "root": "libs/shared/ui",
+      "sourceRoot": "libs/shared/ui/src",
+      "prefix": "generic",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/ui/tsconfig.lib.json",
+              "libs/shared/ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/ui/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/ui/jest.config.js",
+            "tsConfig": "libs/shared/ui/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/shared/ui/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
     "world-bank": {
       "projectType": "application",
       "schematics": {
@@ -10,7 +68,7 @@
       },
       "root": "apps/world-bank",
       "sourceRoot": "apps/world-bank/src",
-      "prefix": "practica-final-curso-ivandpazd",
+      "prefix": "app-world-bank",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -23,12 +81,46 @@
             "aot": true,
             "assets": [
               "apps/world-bank/src/favicon.ico",
-              "apps/world-bank/src/assets"
+              "apps/world-bank/src/assets",
+              "apps/world-bank/src/manifest.webmanifest"
             ],
             "styles": ["apps/world-bank/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
+            "production-es": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/world-bank/src/environments/environment.ts",
+                  "with": "apps/world-bank/src/environments/environment.prod.es.ts"
+                }
+              ],
+              "outputPath": "dist/apps/world-bank/es/",
+              "i18nFile": "apps/world-bank/src/locale/messages.es.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "es",
+              "baseHref": "es",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -55,7 +147,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "apps/world-bank/ngsw-config.json"
             }
           }
         },
@@ -121,64 +215,6 @@
             "tsConfig": ["apps/world-bank-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/world-bank-e2e/**"]
           }
-        }
-      }
-    },
-    "shared-domain": {
-      "root": "libs/shared/domain",
-      "sourceRoot": "libs/shared/domain/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/shared/domain/tsconfig.lib.json",
-              "libs/shared/domain/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/shared/domain/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/shared/domain/jest.config.js",
-            "tsConfig": "libs/shared/domain/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "shared-ui": {
-      "projectType": "library",
-      "root": "libs/shared/ui",
-      "sourceRoot": "libs/shared/ui/src",
-      "prefix": "practica-final-curso-ivandpazd",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/shared/ui/tsconfig.lib.json",
-              "libs/shared/ui/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/shared/ui/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/shared/ui/jest.config.js",
-            "tsConfig": "libs/shared/ui/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/shared/ui/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
         }
       }
     }
