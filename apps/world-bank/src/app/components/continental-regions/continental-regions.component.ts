@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {ContinentalInterface} from "@generic/domain";
 import {HttpClient} from "@angular/common/http";
@@ -7,13 +7,18 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-world-bank-continental-regions',
   templateUrl: './continental-regions.component.html',
-  styleUrls: ['./continental-regions.component.scss']
+  styleUrls: ['./continental-regions.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ContinentalRegionsComponent implements OnInit {
   public continentalRegions$: Observable<ContinentalInterface[]>;
   public continentalRegionsAPI: string;
   public title: string;
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+      private http: HttpClient,
+      private router: Router,
+      private changeDetector: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
     this.continentalRegionsAPI = 'http://api.worldbank.org/v2/region/?format=json';
@@ -33,8 +38,7 @@ export class ContinentalRegionsComponent implements OnInit {
   /**
    * Get ContinentalRegions from API
    */
-  private getContinentalRegions(): void {
+  public getContinentalRegions(): void {
     this.continentalRegions$ = this.http.get<ContinentalInterface[]>(this.continentalRegionsAPI);
   }
-
 }

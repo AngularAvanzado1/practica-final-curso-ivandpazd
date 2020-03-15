@@ -1,13 +1,12 @@
-import { getGreeting } from "../support/app.po";
+import {articleTitle, footer, headerMessage, dataFrom} from "../support/app.po";
 
 describe("world-bank", () => {
   beforeEach(() => cy.visit("/"));
 
-  it("should display welcome message", () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login("my-email@something.com", "myPassword");
-
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains("Welcome to world-bank!");
+  it("should display differents messages", () => {
+    headerMessage().contains("World Bank API");
+    footer().contains("Made by Iván de Paz Delgado");
+    articleTitle().contains("Continental Regions");
+    dataFrom().contains("Data from: 'http://api.worldbank.org/v2/region/?format=json'");
   });
 });

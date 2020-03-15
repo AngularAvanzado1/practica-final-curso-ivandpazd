@@ -1,5 +1,12 @@
-<button (click)="goToContinental()" i18n>Back to Continental Regions</button>
-<div class="data" *ngIf="regions$ | async as countryRegions">
+<button class="generalButton" (click)="goToContinental()" i18n>Back to Continental Regions</button>
+<section class="data" *ngIf="regions$ | async as countryRegions">
+    <div>
+        <h3>Continental Region data: </h3>
+        <p>ID: {{ continent.id }}</p>
+        <p>Code: {{ continent.code }}</p>
+        <p>Iso2Code: {{ continent.iso2code }}</p>
+        <p>Name: {{ continent.name }}</p>
+    </div>
     <generic-data-template [title]="title" [api]="regionsAPI">
         <table>
             <thead>
@@ -28,5 +35,5 @@
             </tbody>
         </table>
     </generic-data-template>
-</div>
+</section>
 

@@ -32,3 +32,10 @@ table thead th td {
 table thead th:first-child {
   border-left: none;
 }
+
+.generalButton {
+  height: 40px;
+  margin-top: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+}

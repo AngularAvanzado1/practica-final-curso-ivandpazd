@@ -1,5 +1,5 @@
-<button (click)="goToContinental()" i18n>Back to Continental Regions</button>
-<button (click)="goToRegion()" i18n>Back to Region</button>
+<button class="generalButton" (click)="goToContinental()" i18n>Back to Continental Regions</button>
+<button class="generalButton" (click)="goToRegion()" i18n>Back to Region</button>
 <div class="data" *ngIf="country$ | async as country">
     <generic-data-template [title]="title" [api]="countryAPI">
         <table>

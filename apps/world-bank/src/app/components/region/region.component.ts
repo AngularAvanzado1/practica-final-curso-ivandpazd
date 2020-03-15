@@ -1,27 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RegionInterface } from "@generic/domain";
+import {ContinentalInterface, RegionInterface} from "@generic/domain";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: 'app-world-bank-region',
   templateUrl: './region.component.html',
-  styleUrls: ['./region.component.scss']
+  styleUrls: ['./region.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class RegionComponent implements OnInit {
   public regions$: Observable<RegionInterface[]>;
   public regionsAPI: string;
   public continentalRegionsAPI: string;
   public title = '';
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
+  public continent: ContinentalInterface;
+  constructor(
+      private route: ActivatedRoute,
+      private http: HttpClient,
+      private router: Router,
+      private changeDetector: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
     const regionCode = this.route.snapshot.paramMap.get("code");
     this.continentalRegionsAPI = 'http://api.worldbank.org/v2/region/?format=json';
     this.regionsAPI = 'http://api.worldbank.org/v2/region/' + regionCode + '/country?per_page=1000&format=json';
     this.getRegions();
-    this.getContinentalRegionName(regionCode);
+    this.getContinentalRegionDataByContinentCode(regionCode);
   }
 
   /**
@@ -48,14 +55,15 @@ export class RegionComponent implements OnInit {
   }
 
   /**
-   * Get ContinentalRegions name from API
+   * Get ContinentalRegions data by continent code from API
    */
-  private getContinentalRegionName(code: string): void {
+  public  getContinentalRegionDataByContinentCode(code: string): any {
     this.http.get(this.continentalRegionsAPI).subscribe(
         continentalRegions => {
           for (const continent of continentalRegions[1]) {
             if (continent.code === code) {
-              this.title = 'Regions of ' + continent.name;
+              this.continent = continent;
+              this.title = 'Regions of ' + this.continent.name;
             }
           }
         });
